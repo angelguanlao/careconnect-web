@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="CareConnect">
+  <rect width="512" height="512" fill="#2C7A7B"/>
+  <g transform="translate(256 256) scale(0.62) translate(-256 -256)">
+    <path fill="#FFFFFF" d="M256 400s-150-98-194-186C39 174 75 102 147 102c40 0 66 22 80 44 14-22 40-44 80-44 72 0 108 72 85 112-44 88-136 186-136 186z"/>
+  </g>
+</svg>

@@ -1,0 +1,45 @@
+{
+  "name": "CareConnect — Accessible Health Portal",
+  "short_name": "CareConnect",
+  "description": "A responsive, accessibility-first health portal: dashboard, notifications, and profile management.",
+  "id": "/",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F3F5F6",
+  "theme_color": "#2C7A7B",
+  "categories": ["health", "medical", "productivity"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "url": "./?source=pwa#/",
+      "description": "Open your health overview"
+    },
+    {
+      "name": "Notifications",
+      "url": "./?source=pwa#/notifications",
+      "description": "Jump to alerts and messages"
+    }
+  ]
+}
