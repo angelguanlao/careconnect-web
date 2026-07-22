@@ -4,6 +4,7 @@ import Toggle from '../components/Toggle.jsx';
 import { usePreferences } from '../context/PreferencesContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
+import { usePageMeta } from '../hooks/usePageMeta.js';
 
 function Row({ title, desc, children }) {
   return (
@@ -22,6 +23,7 @@ export default function Settings() {
   const { signOut } = useAuth();
   const { announce, toast } = useToast();
   const navigate = useNavigate();
+  usePageMeta('Settings', 'Accessibility, notification, and account settings for your CareConnect health portal.');
   const px = Math.round(16 * prefs.textScale);
 
   const signOutNow = () => { signOut(); navigate('/login'); };
@@ -31,7 +33,7 @@ export default function Settings() {
       <header className="page-head"><h1>Settings</h1></header>
 
       <section className="card settings-group" aria-labelledby="acc-h">
-        <span className="eyebrow" id="acc-h">Accessibility</span>
+        <h2 className="eyebrow" id="acc-h">Accessibility</h2>
 
         <div className="setting-col">
           <div className="label">Text size — {px}px</div>
@@ -63,7 +65,7 @@ export default function Settings() {
       </section>
 
       <section className="card settings-group" aria-labelledby="notif-h">
-        <span className="eyebrow" id="notif-h">Notifications</span>
+        <h2 className="eyebrow" id="notif-h">Notifications</h2>
         <Row title="Push notifications" desc="Appointment and prescription alerts on this device.">
           <Toggle id="opt-push" checked={prefs.pushNotifications ?? true} label="Push notifications"
             onChange={(on) => { prefs.update({ pushNotifications: on }); announce(`Push notifications ${on ? 'on' : 'off'}`); }} />
@@ -75,7 +77,7 @@ export default function Settings() {
       </section>
 
       <section className="card settings-group" aria-labelledby="acct-h">
-        <span className="eyebrow" id="acct-h">Account</span>
+        <h2 className="eyebrow" id="acct-h">Account</h2>
         <div className="setting-col">
           <label className="label" htmlFor="set-lang">Language</label>
           <select className="select mt-2" id="set-lang" defaultValue="en" onChange={() => toast('Language preference saved (demo)', 'info')} style={{ maxWidth: 280 }}>

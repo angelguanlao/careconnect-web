@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icon.jsx';
+import { usePageMeta } from '../hooks/usePageMeta.js';
 import { features } from '../data/mockData.js';
 
 export default function Features() {
+  usePageMeta('Features', 'Explore CareConnect features: telemedicine, prescriptions, lab results, health records, care team, and emergency.');
   return (
     <div>
       <header className="page-head">

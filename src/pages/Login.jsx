@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import Icon from '../components/Icon.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
+import { usePageMeta } from '../hooks/usePageMeta.js';
 
 export default function Login() {
   const { signIn } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  usePageMeta('Sign In', 'Sign in to your CareConnect health dashboard to manage appointments, prescriptions, and records.');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,9 +32,23 @@ export default function Login() {
   };
 
   return (
-    <main className="login-wrap" id="main">
-      <form className="login-card" noValidate aria-labelledby="login-title" onSubmit={submit}>
-        <div className="login-logo"><Icon id="heart" size={30} /></div>
+    <main className="login-page" id="main">
+      <div className="login-shell">
+        <aside className="login-brand" aria-label="About CareConnect">
+          <span className="logo"><Icon id="heart" size={26} /></span>
+          <span className="brand-name">CareConnect</span>
+          <h2>Your health, connected.</h2>
+          <p className="tagline">Appointments, prescriptions, lab results, and your care team — all in one accessible place.</p>
+          <figure className="testimonial">
+            <div className="stars" aria-hidden="true">★★★★★</div>
+            <p>"CareConnect keeps my whole family's care organized — a caring companion, every step of the way."</p>
+            <cite>— Jordan M., CareConnect member</cite>
+          </figure>
+        </aside>
+
+        <div className="login-form-col">
+          <form className="login-card" noValidate aria-labelledby="login-title" onSubmit={submit}>
+        <div className="login-logo"><Icon id="heart" size={26} /></div>
         <h1 id="login-title">Welcome back</h1>
         <p className="login-sub">Sign in to your health dashboard</p>
 
@@ -85,7 +101,9 @@ export default function Login() {
         <p className="login-foot">
           Need access? <a href="#" onClick={(e) => { e.preventDefault(); toast('Contact request sent to your care team (demo)', 'info'); }}>Contact your care team</a>
         </p>
-      </form>
+          </form>
+        </div>
+      </div>
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icon.jsx';
+import { usePageMeta } from '../hooks/usePageMeta.js';
 import { NAV_ITEMS, features, notifications, recentActivity } from '../data/mockData.js';
 
 // Flat search index across navigation, features, notifications, and activity.
@@ -16,6 +17,7 @@ function buildIndex() {
 export default function Search() {
   const [query, setQuery] = useState('');
   const inputRef = useRef(null);
+  usePageMeta('Search', 'Search across CareConnect features, notifications, and recent activity.');
   useEffect(() => { inputRef.current?.focus(); }, []);
 
   const q = query.trim().toLowerCase();
@@ -54,7 +56,7 @@ export default function Search() {
 
       {[...groups.entries()].map(([section, items]) => (
         <section className="section" key={section} aria-labelledby={`sec-${section}`}>
-          <span className="eyebrow" id={`sec-${section}`} style={{ display: 'block', marginBottom: 'var(--sp-2)' }}>{section}</span>
+          <h2 className="eyebrow" id={`sec-${section}`} style={{ marginBottom: 'var(--sp-2)' }}>{section}</h2>
           <div className="list-card">
             {items.map((r, i) => (
               <Link className="list-row" to={r.to} key={i}>

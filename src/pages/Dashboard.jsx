@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icon.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import { usePageMeta } from '../hooks/usePageMeta.js';
 import {
   healthMetrics, quickAccess, recentActivity, appointments,
   greeting, firstName, todayLong, initials
@@ -8,6 +9,7 @@ import {
 
 export default function Dashboard() {
   const { user } = useAuth();
+  usePageMeta('Health Dashboard', 'Your personalized health overview: heart rate, steps, sleep, upcoming appointments, and recent activity.');
   return (
     <div>
       <header className="page-head">
@@ -24,7 +26,7 @@ export default function Dashboard() {
       </header>
 
       <section className="section" aria-labelledby="summary-h" style={{ marginTop: 0 }}>
-        <span className="eyebrow" id="summary-h">Today's health summary</span>
+        <h2 className="eyebrow" id="summary-h">Today's health summary</h2>
         <div className="metric-grid">
           {healthMetrics.map((m) => (
             <div className="card metric-card" key={m.label}>
@@ -43,7 +45,7 @@ export default function Dashboard() {
       <div className="dash-grid section">
         <div>
           <section aria-labelledby="quick-h">
-            <span className="eyebrow" id="quick-h" style={{ display: 'block', marginBottom: 'var(--sp-2)' }}>Quick access</span>
+            <h2 className="eyebrow" id="quick-h" style={{ marginBottom: 'var(--sp-2)' }}>Quick access</h2>
             <div className="quick-grid">
               {quickAccess.map((q) => (
                 <Link className="quick-tile" to={q.to} key={q.label}>
@@ -55,7 +57,7 @@ export default function Dashboard() {
           </section>
 
           <section aria-labelledby="activity-h" className="section">
-            <span className="eyebrow" id="activity-h" style={{ display: 'block', marginBottom: 'var(--sp-2)' }}>Recent activity</span>
+            <h2 className="eyebrow" id="activity-h" style={{ marginBottom: 'var(--sp-2)' }}>Recent activity</h2>
             <div className="list-card">
               {recentActivity.map((a) => (
                 <Link className="list-row" to={a.to} key={a.title}>
@@ -72,7 +74,7 @@ export default function Dashboard() {
         </div>
 
         <section aria-labelledby="appts-h">
-          <span className="eyebrow" id="appts-h" style={{ display: 'block', marginBottom: 'var(--sp-2)' }}>Upcoming appointments</span>
+          <h2 className="eyebrow" id="appts-h" style={{ marginBottom: 'var(--sp-2)' }}>Upcoming appointments</h2>
           <div className="list-card">
             {appointments.map((ap) => (
               <div className="appt-card" key={ap.name}>

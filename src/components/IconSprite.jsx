@@ -6,7 +6,7 @@ export default function IconSprite() {
   return (
     <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true" focusable="false">
       <defs>
-        <symbol id="i-heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.5-4.9-9.7-9.3C.6 8.1 2.4 4.5 6 4.5c2 0 3.3 1.1 4 2.2.7-1.1 2-2.2 4-2.2 3.6 0 5.4 3.6 3.7 7.2C19.5 16.1 12 21 12 21z" /></symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></symbol>
         <symbol id="i-home" viewBox="0 0 24 24"><path {...s} d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10" /></symbol>
         <symbol id="i-list" viewBox="0 0 24 24"><path {...s} d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" /></symbol>
         <symbol id="i-bell" viewBox="0 0 24 24"><path {...s} d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></symbol>

@@ -450,19 +450,42 @@ h1[tabindex='-1']:focus, h1[tabindex='-1']:focus-visible { outline: none; }
 .tag-field { flex: 1 1 140px; min-width: 140px; border: 0; outline: none; background: transparent; font: inherit; color: var(--text); min-height: 32px; }
 
 /* ============================================================================
-   LOGIN
+   LOGIN — split-screen (branding panel + form) on ≥768px, centered card on mobile
    ============================================================================ */
-.login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: var(--sp-4); background: linear-gradient(135deg, #E3EEEE 0%, #F3F5F6 50%, #E8F0EA 100%); }
-:root[data-theme='hc'] .login-wrap { background: #000; }
-.login-card { width: min(440px, 100%); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--sp-4); box-shadow: var(--shadow-md); }
-.login-logo { width: 64px; height: 64px; border-radius: var(--radius); background: var(--primary); color: var(--on-primary); display: flex; align-items: center; justify-content: center; margin-bottom: var(--sp-3); }
-.login-card h1 { font-size: calc(34px * var(--text-scale)); margin-bottom: 4px; }
+.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: var(--sp-4); background: linear-gradient(135deg, #E3EEEE 0%, #F3F5F6 50%, #E8F0EA 100%); }
+:root[data-theme='hc'] .login-page { background: #000; }
+.login-shell { width: min(940px, 100%); display: grid; grid-template-columns: 1.05fr 1fr; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); }
+
+/* Branding panel */
+.login-brand { background: linear-gradient(160deg, #2C7A7B 0%, #10262D 100%); color: #fff; padding: var(--sp-5) var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-3); }
+:root[data-theme='hc'] .login-brand { background: #000; border-right: 1px solid var(--border); }
+.login-brand .logo { width: 56px; height: 56px; border-radius: var(--radius-md); background: rgba(255,255,255,0.15); color: #fff; display: inline-flex; align-items: center; justify-content: center; }
+.login-brand .brand-name { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
+.login-brand h2 { color: #fff; font-size: calc(28px * var(--text-scale)); line-height: 1.2; }
+.login-brand .tagline { color: rgba(255,255,255,0.85); }
+.login-brand .testimonial { margin-top: auto; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.16); border-radius: var(--radius-md); padding: var(--sp-3); }
+.login-brand .stars { color: #FFD166; letter-spacing: 2px; }
+.login-brand .testimonial p { margin-top: 6px; }
+.login-brand .testimonial cite { display: block; margin-top: var(--sp-1); color: rgba(255,255,255,0.75); font-style: normal; font-size: calc(var(--fs-small) * var(--text-scale)); }
+
+/* Form column */
+.login-form-col { padding: var(--sp-4); display: flex; align-items: center; }
+.login-card { width: 100%; }
+.login-logo { width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--primary); color: var(--on-primary); display: flex; align-items: center; justify-content: center; margin-bottom: var(--sp-2); }
+.login-card h1 { font-size: calc(30px * var(--text-scale)); margin-bottom: 4px; }
 .login-sub { color: var(--text-muted); margin-bottom: var(--sp-3); }
 .login-label-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .login-label-row label { margin: 0; }
 .login-row { display: flex; align-items: center; justify-content: space-between; margin: var(--sp-2) 0 var(--sp-3); }
 .login-foot { text-align: center; margin-top: var(--sp-3); color: var(--text-muted); }
-.login-divider { border: 0; border-top: 1px solid var(--border); margin: var(--sp-3) 0; }
+
+/* On mobile: hide the branding panel, single-column centered card */
+@media (max-width: 767px) {
+  .login-shell { grid-template-columns: 1fr; width: min(440px, 100%); }
+  .login-brand { display: none; }
+  .login-form-col { padding: var(--sp-4); }
+  /* On phones the form column's mobile logo doubles as the brand mark */
+}
 
 /* ---- Toast / PWA banners ---------------------------------------------- */
 .toast { position: fixed; bottom: var(--sp-3); left: 50%; transform: translateX(-50%); background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--success); border-radius: var(--radius-sm); padding: var(--sp-2) var(--sp-3); box-shadow: var(--shadow-md); z-index: 600; display: flex; align-items: center; gap: var(--sp-1); max-width: 480px; animation: cc-toast-in 0.2s ease both; }

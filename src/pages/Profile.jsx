@@ -3,6 +3,7 @@ import Icon from '../components/Icon.jsx';
 import TagInput from '../components/TagInput.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
+import { usePageMeta } from '../hooks/usePageMeta.js';
 import { initials, BLOOD_GROUPS, ALLERGEN_OPTIONS } from '../data/mockData.js';
 
 function InfoRow({ k, v }) {
@@ -17,6 +18,7 @@ function InfoRow({ k, v }) {
 export default function Profile() {
   const { user, updateUser } = useAuth();
   const { toast } = useToast();
+  usePageMeta('Profile', 'Manage your CareConnect patient profile: personal information, contact details, and health record.');
   const [editing, setEditing] = useState(false);
 
   if (editing) {
@@ -46,7 +48,7 @@ export default function Profile() {
       </div>
 
       <section className="card section" aria-labelledby="pi-h">
-        <span className="eyebrow" id="pi-h" style={{ display: 'block', marginBottom: 'var(--sp-1)' }}>Personal information</span>
+        <h2 className="eyebrow" id="pi-h" style={{ marginBottom: 'var(--sp-1)' }}>Personal information</h2>
         <div className="info-list">
           <InfoRow k="Full name" v={user.name} />
           <InfoRow k="Email" v={user.email} />

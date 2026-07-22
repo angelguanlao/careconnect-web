@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import Icon from '../components/Icon.jsx';
 import { useToast } from '../context/ToastContext.jsx';
+import { usePageMeta } from '../hooks/usePageMeta.js';
 import { notifications as seed } from '../data/mockData.js';
 
 const FILTERS = [
@@ -11,6 +12,7 @@ const FILTERS = [
 
 export default function Notifications() {
   const { announce } = useToast();
+  usePageMeta('Notifications', 'Your CareConnect alerts: appointment reminders, prescription updates, lab results, and care-team messages.');
   const [items, setItems] = useState(seed);
   const [filter, setFilter] = useState('all');
 
