@@ -6,12 +6,13 @@ import { useToast } from '../context/ToastContext.jsx';
 import { usePageMeta } from '../hooks/usePageMeta.js';
 import { initials, BLOOD_GROUPS, ALLERGEN_OPTIONS } from '../data/mockData.js';
 
+// Key/value row rendered as a definition list term + detail.
 function InfoRow({ k, v }) {
   return (
-    <div className="info-row">
-      <div className="k">{k}</div>
-      <div className="v">{v}</div>
-    </div>
+    <>
+      <dt className="k">{k}</dt>
+      <dd className="v">{v}</dd>
+    </>
   );
 }
 
@@ -40,23 +41,23 @@ export default function Profile() {
         <span className="avatar xl" aria-hidden="true">{initials(user.name)}</span>
         <div className="p-name">{user.name}</div>
         <div className="p-sub">Patient · {user.mrn}</div>
-        <div className="profile-stats">
-          <div className="st"><div className="v">{user.stats.appointments}</div><div className="k">Appointments</div></div>
-          <div className="st"><div className="v">{user.stats.providers}</div><div className="k">Providers</div></div>
-          <div className="st"><div className="v">{user.stats.records}</div><div className="k">Records</div></div>
-        </div>
+        <ul className="profile-stats" style={{ listStyle: 'none' }}>
+          <li className="st"><div className="v">{user.stats.appointments}</div><div className="k">Appointments</div></li>
+          <li className="st"><div className="v">{user.stats.providers}</div><div className="k">Providers</div></li>
+          <li className="st"><div className="v">{user.stats.records}</div><div className="k">Records</div></li>
+        </ul>
       </div>
 
       <section className="card section" aria-labelledby="pi-h">
         <h2 className="eyebrow" id="pi-h" style={{ marginBottom: 'var(--sp-1)' }}>Personal information</h2>
-        <div className="info-list">
+        <dl className="info-list">
           <InfoRow k="Full name" v={user.name} />
           <InfoRow k="Email" v={user.email} />
           <InfoRow k="Phone" v={user.phone} />
           <InfoRow k="Date of birth" v={user.dob} />
           <InfoRow k="Blood group" v={user.bloodGroup} />
           <InfoRow k="Known allergies" v={user.allergies.length ? user.allergies.join(', ') : 'None recorded'} />
-        </div>
+        </dl>
       </section>
     </div>
   );
