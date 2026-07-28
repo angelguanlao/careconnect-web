@@ -2,15 +2,30 @@
   "name": "CareConnect — Accessible Health Portal",
   "short_name": "CareConnect",
   "description": "A responsive, accessibility-first health portal: dashboard, notifications, and profile management.",
+  "lang": "en-US",
   "id": "/",
   "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "any",
   "background_color": "#F3F5F6",
   "theme_color": "#2C7A7B",
   "categories": ["health", "medical", "productivity"],
+  "prefer_related_applications": false,
   "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
     {
       "src": "./icons/icon-192.png",
       "sizes": "192x192",
@@ -28,6 +43,22 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./icons/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "CareConnect health dashboard on desktop"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "CareConnect on mobile"
     }
   ],
   "shortcuts": [
