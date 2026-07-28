@@ -46,47 +46,51 @@ export default function Dashboard() {
         <div>
           <section aria-labelledby="quick-h">
             <h2 className="eyebrow" id="quick-h" style={{ marginBottom: 'var(--sp-2)' }}>Quick access</h2>
-            <div className="quick-grid">
+            <ul className="quick-grid" style={{ listStyle: 'none' }}>
               {quickAccess.map((q) => (
-                <Link className="quick-tile" to={q.to} key={q.label}>
-                  <span className={`tile ${q.tile}`}><Icon id={q.icon} size={22} /></span>
-                  <span className="label">{q.label}</span>
-                </Link>
+                <li key={q.label}>
+                  <Link className="quick-tile" to={q.to}>
+                    <span className={`tile ${q.tile}`}><Icon id={q.icon} size={22} /></span>
+                    <span className="label">{q.label}</span>
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
           <section aria-labelledby="activity-h" className="section">
             <h2 className="eyebrow" id="activity-h" style={{ marginBottom: 'var(--sp-2)' }}>Recent activity</h2>
-            <div className="list-card">
+            <ul className="list-card" style={{ listStyle: 'none' }}>
               {recentActivity.map((a) => (
-                <Link className="list-row" to={a.to} key={a.title}>
-                  <span className={`tile ${a.tile}`}><Icon id={a.icon} size={20} /></span>
-                  <span className="row-main">
-                    <span className="row-title" style={{ display: 'block' }}>{a.title}</span>
-                    <span className="row-sub">{a.sub}</span>
-                  </span>
-                  <span className="row-chevron"><Icon id="chevron" size={18} /></span>
-                </Link>
+                <li key={a.title}>
+                  <Link className="list-row" to={a.to}>
+                    <span className={`tile ${a.tile}`}><Icon id={a.icon} size={20} /></span>
+                    <span className="row-main">
+                      <span className="row-title" style={{ display: 'block' }}>{a.title}</span>
+                      <span className="row-sub">{a.sub}</span>
+                    </span>
+                    <span className="row-chevron"><Icon id="chevron" size={18} /></span>
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
         </div>
 
         <section aria-labelledby="appts-h">
           <h2 className="eyebrow" id="appts-h" style={{ marginBottom: 'var(--sp-2)' }}>Upcoming appointments</h2>
-          <div className="list-card">
+          <ul className="list-card" style={{ listStyle: 'none' }}>
             {appointments.map((ap) => (
-              <div className="appt-card" key={ap.name}>
+              <li className="appt-card" key={ap.name}>
                 <span className="avatar sm" aria-hidden="true">{ap.initials}</span>
                 <span className="appt-main">
                   <span className="appt-name" style={{ display: 'block' }}>{ap.name}</span>
                   <span className="appt-spec">{ap.specialty}</span>
                   <span className="appt-when"><Icon id="calendar" size={14} /> {ap.when}</span>
                 </span>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       </div>
     </div>

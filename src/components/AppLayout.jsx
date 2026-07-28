@@ -54,15 +54,17 @@ export default function AppLayout() {
           <div className="name">CareConnect</div>
           <div className="sub">Health Platform</div>
         </div>
-        <div className="side-nav">
+        <ul className="side-nav" style={{ listStyle: 'none' }}>
           {NAV_ITEMS.map((item) => (
-            <NavLink key={item.screen} to={item.path} end={item.path === '/'} className="side-link">
-              <Icon id={item.icon} size={20} />
-              <span>{item.label}</span>
-              {item.badge ? <span className="count-badge" aria-label={`${item.badge} unread`}>{item.badge}</span> : null}
-            </NavLink>
+            <li key={item.screen}>
+              <NavLink to={item.path} end={item.path === '/'} className="side-link">
+                <Icon id={item.icon} size={20} />
+                <span>{item.label}</span>
+                {item.badge ? <span className="count-badge" aria-label={`${item.badge} unread`}>{item.badge}</span> : null}
+              </NavLink>
+            </li>
           ))}
-        </div>
+        </ul>
         <div className="sidebar-foot">WCAG 2.1 AA · PWA</div>
       </nav>
 
@@ -82,13 +84,17 @@ export default function AppLayout() {
 
       {/* Mobile bottom tab bar (≤767px) */}
       <nav className="bottom-nav" aria-label="Primary">
-        {NAV_ITEMS.map((item) => (
-          <NavLink key={item.screen} to={item.path} end={item.path === '/'} className="bottom-link">
-            <Icon id={item.icon} size={22} />
-            <span>{item.label}</span>
-            {item.badge ? <span className="count-badge" aria-hidden="true">{item.badge}</span> : null}
-          </NavLink>
-        ))}
+        <ul style={{ listStyle: 'none', display: 'contents' }}>
+          {NAV_ITEMS.map((item) => (
+            <li key={item.screen}>
+              <NavLink to={item.path} end={item.path === '/'} className="bottom-link">
+                <Icon id={item.icon} size={22} />
+                <span>{item.label}</span>
+                {item.badge ? <span className="count-badge" aria-hidden="true">{item.badge}</span> : null}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </nav>
     </div>
   );

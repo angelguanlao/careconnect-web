@@ -21,6 +21,17 @@ export default function PwaBanner() {
     };
   }, []);
 
+  // Escape key dismisses whichever banner is visible.
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      if (updateReg) { setUpdateReg(null); return; }
+      if (installEvent) setInstallEvent(null);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [updateReg, installEvent]);
+
   const install = async () => {
     if (!installEvent) return;
     installEvent.prompt();

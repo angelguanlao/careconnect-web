@@ -54,22 +54,27 @@ export default function Search() {
         {q ? `${results.length} result${results.length === 1 ? '' : 's'} for “${query.trim()}”.` : 'Type to search across your portal.'}
       </p>
 
-      {[...groups.entries()].map(([section, items]) => (
-        <section className="section" key={section} aria-labelledby={`sec-${section}`}>
-          <h2 className="eyebrow" id={`sec-${section}`} style={{ marginBottom: 'var(--sp-2)' }}>{section}</h2>
-          <div className="list-card">
-            {items.map((r, i) => (
-              <Link className="list-row" to={r.to} key={i}>
-                <span className="row-main">
-                  <span className="row-title" style={{ display: 'block' }}>{r.title}</span>
-                  <span className="row-sub">{r.sub}</span>
-                </span>
-                <span className="row-chevron"><Icon id="chevron" size={18} /></span>
-              </Link>
-            ))}
-          </div>
-        </section>
-      ))}
+      {[...groups.entries()].map(([section, items]) => {
+        const sectionId = `sec-${section.toLowerCase().replace(/\s+/g, '-')}`;
+        return (
+          <section className="section" key={section} aria-labelledby={sectionId}>
+            <h2 className="eyebrow" id={sectionId} style={{ marginBottom: 'var(--sp-2)' }}>{section}</h2>
+            <ul className="list-card" style={{ listStyle: 'none' }}>
+              {items.map((r, i) => (
+                <li key={i}>
+                  <Link className="list-row" to={r.to}>
+                    <span className="row-main">
+                      <span className="row-title" style={{ display: 'block' }}>{r.title}</span>
+                      <span className="row-sub">{r.sub}</span>
+                    </span>
+                    <span className="row-chevron"><Icon id="chevron" size={18} /></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
     </div>
   );
 }

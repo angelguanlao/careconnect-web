@@ -57,4 +57,22 @@ describe('PwaBanner', () => {
     expect(reg.waiting.postMessage).toHaveBeenCalledWith('SKIP_WAITING');
     expect(reload).toHaveBeenCalled();
   });
+
+  it('Escape key dismisses the install banner', () => {
+    render(<PwaBanner />);
+    const promptEvent = { preventDefault: jest.fn(), prompt: jest.fn(), userChoice: Promise.resolve() };
+    act(() => { window.dispatchEvent(Object.assign(new Event('beforeinstallprompt'), promptEvent)); });
+    expect(screen.getByText('Install CareConnect')).toBeInTheDocument();
+    act(() => { fireEvent.keyDown(document, { key: 'Escape' }); });
+    expect(screen.queryByText('Install CareConnect')).not.toBeInTheDocument();
+  });
+
+  it('Escape key dismisses the update banner', () => {
+    render(<PwaBanner />);
+    const reg = { waiting: { postMessage: jest.fn() } };
+    act(() => { window.dispatchEvent(new CustomEvent('sw-update-ready', { detail: reg })); });
+    expect(screen.getByText('Update available')).toBeInTheDocument();
+    act(() => { fireEvent.keyDown(document, { key: 'Escape' }); });
+    expect(screen.queryByText('Update available')).not.toBeInTheDocument();
+  });
 });

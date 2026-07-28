@@ -25,12 +25,14 @@ export default function TagInput({ id, label, tags, setTags, suggestions = [] })
   return (
     <>
       <div className="tag-input">
-        {tags.map((t, i) => (
-          <span className="tag" key={t}>
-            <span>{t}</span>
-            <button type="button" className="tag-x" aria-label={`Remove ${t}`} onClick={() => removeAt(i)}>×</button>
-          </span>
-        ))}
+        <ul className="tag-list" style={{ listStyle: 'none', display: 'contents' }} aria-label="Added tags">
+          {tags.map((t, i) => (
+            <li className="tag" key={t}>
+              <span>{t}</span>
+              <button type="button" className="tag-x" aria-label={`Remove ${t}`} onClick={() => removeAt(i)}>×</button>
+            </li>
+          ))}
+        </ul>
         <input
           ref={inputRef}
           className="tag-field"

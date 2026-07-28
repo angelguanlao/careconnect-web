@@ -75,4 +75,11 @@ describe('TagInput', () => {
     expect(document.getElementById('tags-list')).toBeInTheDocument();
     expect(document.querySelector('option[value="Penicillin"]')).toBeInTheDocument();
   });
+
+  it('renders tags as list items for screen reader semantics', () => {
+    setup(['Penicillin', 'Latex']);
+    const list = screen.getByRole('list', { name: 'Added tags' });
+    expect(list).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem').length).toBe(2);
+  });
 });
