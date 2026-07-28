@@ -14,7 +14,7 @@
    Bump CACHE_VERSION on every deploy so old caches are cleaned up in `activate`.
    ============================================================================ */
 
-const CACHE_VERSION = 'careconnect-v1';
+const CACHE_VERSION = 'careconnect-v2';
 const PRECACHE = `${CACHE_VERSION}-precache`;
 const RUNTIME = `${CACHE_VERSION}-runtime`;
 
