@@ -36,7 +36,7 @@ export function PreferencesProvider({ children }) {
     root.style.setProperty('--text-scale', String(prefs.textScale));
     document.body.classList.toggle('text-spacing', prefs.textSpacing);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', prefs.highContrast ? '#000000' : '#0052CC');
+    if (meta) meta.setAttribute('content', prefs.highContrast ? '#000000' : '#2C7A7B');
     localStorage.setItem(PREF_KEY, JSON.stringify(prefs));
   }, [prefs]);
 

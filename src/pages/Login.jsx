@@ -67,7 +67,7 @@ export default function Login() {
         <div className="field">
           <div className="login-label-row">
             <label htmlFor="password">Password</label>
-            <a href="#" onClick={(e) => { e.preventDefault(); toast('Password reset link sent (demo)', 'info'); }}>Forgot password?</a>
+            <button type="button" className="link-action" onClick={() => toast('Password reset link sent (demo)', 'info')}>Forgot password?</button>
           </div>
           <div className="input-icon">
             <span className="lead"><Icon id="lock" size={18} /></span>
@@ -99,7 +99,7 @@ export default function Login() {
         <button className="btn btn-lg btn-block" type="submit">Sign in</button>
 
         <p className="login-foot">
-          Need access? <a href="#" onClick={(e) => { e.preventDefault(); toast('Contact request sent to your care team (demo)', 'info'); }}>Contact your care team</a>
+          Need access? <button type="button" className="link-action" onClick={() => toast('Contact request sent to your care team (demo)', 'info')}>Contact your care team</button>
         </p>
           </form>
         </div>
