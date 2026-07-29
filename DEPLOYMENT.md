@@ -8,14 +8,37 @@
 - **Framework**: Vite SPA with React HashRouter
 
 ### Deployed URL
-**https://careconnect-web-theta.vercel.app/**
+**Pending — Connect to Vercel/Netlify via GitHub**
 
 ### Deployment Steps
-1. Build app: `npm run build` (outputs to `dist/`)
-2. Deploy to Vercel:
-   - **Option A (GitHub Integration)**: Connect repo to Vercel dashboard → auto-deploys on main branch push
-   - **Option B (CLI)**: Run `vercel --prod --yes` after authentication
-   - **Option C (Netlify)**: Run `netlify deploy --prod --dir=dist`
+1. Build app: `npm run build` ✅ (outputs to `dist/`)
+2. Connect to deployment platform:
+
+   **Option A (Recommended - Vercel via GitHub Integration):**
+   - Go to https://vercel.com/angelguanlao (log in if needed)
+   - Click "Add New..." → "Project"
+   - Import `angelguanlao/careconnect-web` from GitHub
+   - Build settings will auto-detect:
+     - Framework: Vite
+     - Build Command: `npm run build`
+     - Output Directory: `dist`
+   - Click "Deploy" → Vercel will auto-deploy on every main branch push
+
+   **Option B (Vercel CLI):**
+   ```bash
+   cd careconnect-web
+   npm run build
+   vercel --prod --yes
+   ```
+   (Requires `vercel login` first if not authenticated)
+
+   **Option C (Netlify):**
+   ```bash
+   cd careconnect-web
+   npm run build
+   netlify deploy --prod --dir=dist
+   ```
+   (Requires `netlify login` first)
 
 ### Key Features Verified in Production
 - ✅ All 7 pages load (Dashboard, Features, Notifications, Profile, Settings, Search, Login)
