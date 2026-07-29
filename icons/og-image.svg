@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="CareConnect — Accessible Health Portal">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E3EEEE"/>
+      <stop offset="0.5" stop-color="#FAF8F4"/>
+      <stop offset="1" stop-color="#E8F0EA"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g transform="translate(120 235)">
+    <rect width="160" height="160" rx="36" fill="#2C7A7B"/>
+    <path fill="#FFFFFF" transform="translate(30 30) scale(4.17)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </g>
+  <text x="330" y="300" font-family="Verdana, sans-serif" font-size="72" font-weight="700" fill="#1A1A1A">CareConnect</text>
+  <text x="332" y="370" font-family="Verdana, sans-serif" font-size="34" fill="#5C5752">Accessible Health Portal · WCAG 2.1 AA</text>
+</svg>
