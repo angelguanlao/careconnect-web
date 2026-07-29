@@ -7,38 +7,42 @@
 - **Output Directory**: `dist/`
 - **Framework**: Vite SPA with React HashRouter
 
+# CareConnect Web - Week 11 Deployment
+
+## Production Deployment via GitHub Pages
+
 ### Deployed URL
-**Pending — Connect to Vercel/Netlify via GitHub**
+**https://angelguanlao.github.io/careconnect-web/**
 
-### Deployment Steps
-1. Build app: `npm run build` ✅ (outputs to `dist/`)
-2. Connect to deployment platform:
+### Deployment Setup
+The app is configured for GitHub Pages with:
+- **Base path**: `./` (relative paths in Vite config for sub-path hosting)
+- **Routing**: React HashRouter (no server rewrites needed)
+- **Build output**: `dist/` directory
+- **Deploy script**: `npm run deploy` (builds + pushes to gh-pages branch)
 
-   **Option A (Recommended - Vercel via GitHub Integration):**
-   - Go to https://vercel.com/angelguanlao (log in if needed)
-   - Click "Add New..." → "Project"
-   - Import `angelguanlao/careconnect-web` from GitHub
-   - Build settings will auto-detect:
-     - Framework: Vite
-     - Build Command: `npm run build`
-     - Output Directory: `dist`
-   - Click "Deploy" → Vercel will auto-deploy on every main branch push
+### How to Deploy
+```bash
+# One-time setup: already done via npm run deploy
+# This builds the app and pushes to gh-pages branch
 
-   **Option B (Vercel CLI):**
-   ```bash
-   cd careconnect-web
-   npm run build
-   vercel --prod --yes
-   ```
-   (Requires `vercel login` first if not authenticated)
+# To deploy again after changes:
+npm run deploy
 
-   **Option C (Netlify):**
-   ```bash
-   cd careconnect-web
-   npm run build
-   netlify deploy --prod --dir=dist
-   ```
-   (Requires `netlify login` first)
+# The gh-pages branch is automatically deployed via GitHub Actions/Pages
+```
+
+### Verify GitHub Pages is Enabled
+1. Go to: https://github.com/angelguanlao/careconnect-web/settings/pages
+2. Confirm:
+   - **Source**: Deploy from a branch
+   - **Branch**: `gh-pages` / `root`
+3. Click **Save** if needed
+
+### Live App
+- **URL**: https://angelguanlao.github.io/careconnect-web/
+- **Demo Login**: demo@careconnect.com / Demo@123
+- **PWA Install**: Open DevTools → Application → Manifest to test install prompt (production builds only)
 
 ### Key Features Verified in Production
 - ✅ All 7 pages load (Dashboard, Features, Notifications, Profile, Settings, Search, Login)
