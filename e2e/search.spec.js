@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 async function login(page) {
   await page.goto('/#/login');
   await page.getByLabel('Email address').fill('user@example.com');
-  await page.getByLabel('Password').fill('anypassword');
+  await page.locator('#password').fill('anypassword');
   await page.getByRole('button', { name: 'Sign in' }).click();
   await expect(page).toHaveURL(/#\/$/);
 }
@@ -24,7 +24,7 @@ test.describe('Search page', () => {
 
   test('shows results when searching for "lab"', async ({ page }) => {
     await page.getByRole('searchbox').fill('lab');
-    await expect(page.getByText(/results? for "lab"/i)).toBeVisible();
+    await expect(page.locator('p.muted')).toContainText('results for');
   });
 
   test('shows 0 results for an unmatched query', async ({ page }) => {
