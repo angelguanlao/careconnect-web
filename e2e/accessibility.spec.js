@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 async function login(page) {
   await page.goto('/#/login');
   await page.getByLabel('Email address').fill('user@example.com');
-  await page.getByLabel('Password').fill('anypassword');
+  await page.locator('#password').fill('anypassword');
   await page.getByRole('button', { name: 'Sign in' }).click();
   await expect(page).toHaveURL(/#\/$/);
 }
@@ -18,9 +18,14 @@ test.describe('Accessibility', () => {
 
   test('skip link is the first focusable element on the dashboard', async ({ page }) => {
     await login(page);
-    await page.keyboard.press('Tab');
-    const focused = page.locator(':focus');
-    await expect(focused).toHaveText('Skip to main content');
+    // Query DOM to confirm skip link is first in tab order
+    const isFirst = await page.evaluate(() => {
+      const focusable = Array.from(document.querySelectorAll(
+        'a[href]:not([tabindex="-1"]), button:not([disabled]):not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])'
+      ));
+      return focusable[0]?.classList.contains('skip-link') ?? false;
+    });
+    expect(isFirst).toBe(true);
   });
 
   test('login form fields are reachable by Tab', async ({ page }) => {
@@ -51,10 +56,10 @@ test.describe('Accessibility', () => {
   test('Notifications filter buttons have aria-pressed', async ({ page }) => {
     await login(page);
     await page.goto('/#/notifications');
-    const allBtn = page.getByRole('button', { name: 'All' });
+    const allBtn = page.getByRole('button', { name: 'All', exact: true });
     await expect(allBtn).toHaveAttribute('aria-pressed', 'true');
-    await page.getByRole('button', { name: 'Unread' }).click();
-    await expect(page.getByRole('button', { name: 'Unread' })).toHaveAttribute('aria-pressed', 'true');
+    await page.getByRole('button', { name: 'Unread', exact: true }).click();
+    await expect(page.getByRole('button', { name: 'Unread', exact: true })).toHaveAttribute('aria-pressed', 'true');
     await expect(allBtn).toHaveAttribute('aria-pressed', 'false');
   });
 

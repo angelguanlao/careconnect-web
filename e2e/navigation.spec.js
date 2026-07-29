@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 async function login(page) {
   await page.goto('/#/login');
   await page.getByLabel('Email address').fill('user@example.com');
-  await page.getByLabel('Password').fill('anypassword');
+  await page.locator('#password').fill('anypassword');
   await page.getByRole('button', { name: 'Sign in' }).click();
   await expect(page).toHaveURL(/#\/$/);
 }

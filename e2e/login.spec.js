@@ -11,7 +11,7 @@ test.describe('Login flow', () => {
 
   test('shows error for invalid email', async ({ page }) => {
     await page.getByLabel('Email address').fill('notanemail');
-    await page.getByLabel('Password').fill('pw');
+    await page.locator('#password').fill('pw');
     await page.getByRole('button', { name: 'Sign in' }).click();
     await expect(page.getByRole('alert')).toContainText('Enter a valid email address.');
   });
@@ -24,14 +24,14 @@ test.describe('Login flow', () => {
 
   test('navigates to dashboard on valid credentials', async ({ page }) => {
     await page.getByLabel('Email address').fill('user@example.com');
-    await page.getByLabel('Password').fill('anypassword');
+    await page.locator('#password').fill('anypassword');
     await page.getByRole('button', { name: 'Sign in' }).click();
     await expect(page).toHaveURL(/#\/$/);
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Good');
   });
 
   test('toggle shows and hides password', async ({ page }) => {
-    const pw = page.getByLabel('Password');
+    const pw = page.locator('#password');
     await expect(pw).toHaveAttribute('type', 'password');
     await page.getByLabel('Show password').click();
     await expect(pw).toHaveAttribute('type', 'text');
