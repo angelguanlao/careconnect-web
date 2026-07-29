@@ -5,3 +5,6 @@ dist/
 coverage/
 playwright-report/
 test-results/
+
+# Submission document — generated into docs/, submitted directly, not versioned.
+docs/*.docx
