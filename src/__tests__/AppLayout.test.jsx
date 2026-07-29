@@ -16,6 +16,8 @@ function renderLayout(initialPath = '/') {
                 <Route index element={<h1>Dashboard</h1>} />
                 <Route path="search" element={<h1>Search</h1>} />
                 <Route path="settings" element={<h1>Settings</h1>} />
+                <Route path="notifications" element={<h1>Notifications</h1>} />
+                <Route path="profile" element={<h1>Profile</h1>} />
               </Route>
             </Routes>
           </MemoryRouter>
@@ -78,5 +80,66 @@ describe('AppLayout', () => {
     renderLayout();
     fireEvent.keyDown(document, { key: 'f', ctrlKey: true });
     expect(screen.getByRole('heading', { name: 'Search' })).toBeInTheDocument();
+  });
+
+  // --- The remaining global shortcuts --------------------------------------
+  it.each([
+    ['1', 'Dashboard'],
+    ['2', 'Notifications'],
+    ['3', 'Profile'],
+  ])('navigates via Ctrl+%s to %s', (key, heading) => {
+    renderLayout('/settings');
+    fireEvent.keyDown(document, { key, ctrlKey: true });
+    expect(screen.getByRole('heading', { name: heading })).toBeInTheDocument();
+  });
+
+  it('accepts Cmd as well as Ctrl for shortcuts', () => {
+    renderLayout();
+    fireEvent.keyDown(document, { key: 'f', metaKey: true });
+    expect(screen.getByRole('heading', { name: 'Search' })).toBeInTheDocument();
+  });
+
+  it('handles the uppercase form of a shortcut key', () => {
+    renderLayout();
+    fireEvent.keyDown(document, { key: 'F', ctrlKey: true });
+    expect(screen.getByRole('heading', { name: 'Search' })).toBeInTheDocument();
+  });
+
+  it('navigates to settings via F1', () => {
+    renderLayout();
+    fireEvent.keyDown(document, { key: 'F1' });
+    expect(screen.getByRole('heading', { name: 'Settings' })).toBeInTheDocument();
+  });
+
+  it('toggles high contrast via Ctrl+Alt+H', () => {
+    renderLayout();
+    const before = document.documentElement.dataset.theme;
+    fireEvent.keyDown(document, { key: 'h', ctrlKey: true, altKey: true });
+    expect(document.documentElement.dataset.theme).not.toBe(before);
+  });
+
+  it('ignores a bare key press with no modifier', () => {
+    renderLayout();
+    fireEvent.keyDown(document, { key: 'f' });
+    expect(screen.getByRole('heading', { name: 'Dashboard' })).toBeInTheDocument();
+  });
+
+  it('ignores an unmapped modifier combination', () => {
+    renderLayout();
+    fireEvent.keyDown(document, { key: 'q', ctrlKey: true });
+    expect(screen.getByRole('heading', { name: 'Dashboard' })).toBeInTheDocument();
+  });
+
+  // --- Focus management on route change ------------------------------------
+  it('moves focus to the h1 of the newly routed screen', () => {
+    renderLayout();
+    fireEvent.keyDown(document, { key: ',', ctrlKey: true });
+    const heading = screen.getByRole('heading', { name: 'Settings' });
+    expect(heading).toHaveFocus();
+  });
+
+  it('makes the routed heading programmatically focusable', () => {
+    renderLayout();
+    expect(screen.getByRole('heading', { name: 'Dashboard' })).toHaveAttribute('tabindex', '-1');
   });
 });

@@ -11,6 +11,9 @@ jest.mock('react-router-dom', () => ({
 describe('Settings page', () => {
   beforeEach(() => {
     mockNavigate.mockClear();
+    // Preferences persist to localStorage, so without this a toggle flipped in
+    // one test leaks into the next and the suite stops being order-independent.
+    localStorage.clear();
     renderWithProviders(<Settings />);
   });
 
@@ -76,5 +79,72 @@ describe('Settings page', () => {
 
   it('increase text size button is present', () => {
     expect(screen.getByLabelText('Increase text size')).toBeInTheDocument();
+  });
+
+  // --- Behaviour: every switch is actually operated, not just rendered ------
+  // Each onChange handler both writes the preference and announces the change,
+  // so these also cover the announce() calls.
+  it.each([
+    ['Reduce motion'],
+    ['Screen reader optimizations'],
+    ['Push notifications'],
+    ['Email notifications'],
+  ])('toggles the %s switch', (name) => {
+    const toggle = screen.getByRole('switch', { name });
+    const before = toggle.getAttribute('aria-checked');
+    fireEvent.click(toggle);
+    expect(toggle.getAttribute('aria-checked')).not.toBe(before);
+  });
+
+  it('toggles a switch back to its original state on a second click', () => {
+    const toggle = screen.getByRole('switch', { name: 'Reduce motion' });
+    const before = toggle.getAttribute('aria-checked');
+    fireEvent.click(toggle);
+    fireEvent.click(toggle);
+    expect(toggle.getAttribute('aria-checked')).toBe(before);
+  });
+
+  // --- Behaviour: text size controls ---------------------------------------
+  it('increases the text size when the increase button is clicked', () => {
+    expect(screen.getByText(/Text size — 16px/)).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText('Increase text size'));
+    expect(screen.getByText(/Text size — 18px/)).toBeInTheDocument();
+  });
+
+  it('decreases the text size when the decrease button is clicked', () => {
+    fireEvent.click(screen.getByLabelText('Decrease text size'));
+    expect(screen.getByText(/Text size — 14px/)).toBeInTheDocument();
+  });
+
+  it('updates the text size from the slider', () => {
+    const slider = screen.getByRole('slider', { name: 'Text size' });
+    fireEvent.change(slider, { target: { value: '1.5' } });
+    expect(screen.getByText(/Text size — 24px/)).toBeInTheDocument();
+  });
+
+  it('exposes the text size to screen readers via aria-valuetext', () => {
+    const slider = screen.getByRole('slider', { name: 'Text size' });
+    fireEvent.change(slider, { target: { value: '1.5' } });
+    expect(slider).toHaveAttribute('aria-valuetext', '24 pixels');
+  });
+
+  it('clamps the text size at the 2x maximum', () => {
+    const slider = screen.getByRole('slider', { name: 'Text size' });
+    fireEvent.change(slider, { target: { value: '2' } });
+    fireEvent.click(screen.getByLabelText('Increase text size'));
+    expect(screen.getByText(/Text size — 32px/)).toBeInTheDocument();
+  });
+
+  it('clamps the text size at the 0.8x minimum', () => {
+    const slider = screen.getByRole('slider', { name: 'Text size' });
+    fireEvent.change(slider, { target: { value: '0.8' } });
+    fireEvent.click(screen.getByLabelText('Decrease text size'));
+    expect(screen.getByText(/Text size — 13px/)).toBeInTheDocument();
+  });
+
+  // --- Behaviour: account section ------------------------------------------
+  it('confirms the change when a language is selected', () => {
+    fireEvent.change(screen.getByLabelText('Language'), { target: { value: 'es' } });
+    expect(screen.getByText(/Language preference saved/)).toBeInTheDocument();
   });
 });
