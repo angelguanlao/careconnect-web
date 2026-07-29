@@ -1,12 +1,16 @@
 // Inline SVG symbol sprite. Rendered once at the app root; every <Icon>
 // references a symbol by id. Meaning never relies on color alone — icons pair
-// with text labels throughout the UI. Line icons are Lucide-style (MIT).
+// with text labels throughout the UI. Line icons are Lucide-style (ISC).
 export default function IconSprite() {
   const s = { fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' };
   return (
     <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true" focusable="false">
       <defs>
-        <symbol id="i-heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></symbol>
+        {/* Lucide "heart-pulse" — the brand mark, matching the favicon and PWA icons. */}
+        <symbol id="i-heart" viewBox="0 0 24 24">
+          <path {...s} d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+          <path {...s} d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+        </symbol>
         <symbol id="i-home" viewBox="0 0 24 24"><path {...s} d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10" /></symbol>
         <symbol id="i-list" viewBox="0 0 24 24"><path {...s} d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" /></symbol>
         <symbol id="i-bell" viewBox="0 0 24 24"><path {...s} d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></symbol>

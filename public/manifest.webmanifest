@@ -3,7 +3,7 @@
   "short_name": "CareConnect",
   "description": "A responsive, accessibility-first health portal: dashboard, notifications, and profile management.",
   "lang": "en-US",
-  "id": "/",
+  "id": "./",
   "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",

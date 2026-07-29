@@ -12,7 +12,8 @@
     "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
     "deploy": "npm run build && gh-pages -d dist",
-    "deploy:ci": "npm run build && gh-pages -d dist -t"
+    "deploy:ci": "npm run build && gh-pages -d dist -t",
+    "capture": "node scripts/capture.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
